@@ -81,7 +81,11 @@ public class Address {
     }
     @Override
     public String toString() {
+        return this.getSite()+'\n'+this.getStreet()+'\n'+this.getCity()+
+                ", "+this.getState()+' '+this.getZip()+'\n'+this.getPhone()+
+                '\n'+this.getUrl();
         // TODO: Implement this method
-        throw new UnsupportedOperationException();
+       
+        //throw new UnsupportedOperationException();
     }
 }

@@ -5,6 +5,7 @@ package mlb;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -48,8 +49,19 @@ public class DatabaseReader {
         try {
             stat = this.db_connection.createStatement();
             // TODO: Write an SQL statement to retrieve a league (conference) and a division
-            String sql = "";
+            String sql = "SELECT DISTINCT division,conference FROM team";
             // TODO: Add all 6 combinations to the ArrayList divisions
+            results = stat.executeQuery(sql);
+
+            ResultSetMetaData rsmd = results.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (results.next()) {
+                String divisionstring = " | ";
+                for (int i = 1; i <= columnsNumber; i++) {
+                    divisionstring += results.getString(i);
+                }
+                divisions.add(divisionstring);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseReader.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -71,9 +83,23 @@ public class DatabaseReader {
         try {
             stat = this.db_connection.createStatement();
             // TODO: Write an SQL statement to retrieve a teams from a specific division
-            String sql = "";
+            String[] con_div = confDiv.split("[|]");
+            con_div[0] = con_div[0].replaceAll("\\s+", "");
+            con_div[1] = con_div[1].replaceAll("\\s+", "");
+            String sql = "SELECT * FROM team WHERE conference==\"" + con_div[0] + "\"and division==\"" + con_div[1] + "\"";
+
             results = stat.executeQuery(sql);
             // TODO: Add all 5 teams to the ArrayList teams
+            ResultSetMetaData rsmd = results.getMetaData();
+            //An object that can be used to get information about the types and properties of the columns in a ResultSet object.
+            int columnsNumber = rsmd.getColumnCount();
+            while (results.next()) {
+                String teamString = "";
+                for (int i = 1; i <= columnsNumber; i++) {
+                    teamString += results.getString(i);
+                }
+                teams.add(teamString);
+            }
             results.close();
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseReader.class.getName()).log(Level.SEVERE, null, ex);
