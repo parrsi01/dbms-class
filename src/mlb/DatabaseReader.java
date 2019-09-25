@@ -111,9 +111,14 @@ public class DatabaseReader {
      * @param teamName
      * @return Team info
      */
-    public Team getTeamInfo(String teamName) {
+    public Team getTeamInfo(String teamName) throws SQLException {
         Team team = null;
+        Statement stat = null;
+        ResultSet teamName;
+        String sql = "SELECT roster, address, logo from teams";
         // TODO: Retrieve team info (roster, address, and logo) from the database
+        teamName = stat.executeQuery(sql);
+        team.add(teamName);
         return team;
     }
 }
