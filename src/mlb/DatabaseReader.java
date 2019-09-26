@@ -113,12 +113,20 @@ public class DatabaseReader {
      */
     public Team getTeamInfo(String teamName) throws SQLException {
         Team team = null;
-        Statement stat = null;
-        ResultSet teamName;
-        String sql = "SELECT roster, address, logo from teams";
-        // TODO: Retrieve team info (roster, address, and logo) from the database
-        teamName = stat.executeQuery(sql);
-        team.add(teamName);
+                this.connect();
+        try {
+            Statement stat = this.db_connection.createStatement();
+            // TODO: Retrieve team info (roster, address, and logo) from the database
+
+            String sql = "﻿SELECT * FROM team";
+            ResultSet results = stat.executeQuery(sql);
+            Team newTeam;
+        results = stat.executeQuery(sql);
+        
+        results.close();
+        return team;
+    } catch (SQLException ex) {
+        Logger.getLogger(DatabaseReader.class.getName()).log(Level.SEVERE, null, ex);
         return team;
     }
-}
+}}
