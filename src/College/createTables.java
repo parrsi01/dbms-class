@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package College;
+package Colleges;
 
 /**
  *
@@ -25,7 +25,7 @@ public class createTables{
      */
     public static void main(String[] args) {
         
-        String url = "jdbc:sqlite:data/mlb/mlb.sqlite";
+        String url = "jdbc:mysql://localhost:3306/mysqljdbc";
 
         
         String username = "parrsi01";
