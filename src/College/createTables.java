@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Colleges;
+package College;
 
 /**
  *
@@ -23,7 +23,7 @@ public class createTables{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         
         String url = "jdbc:mysql://localhost:3306/mysqljdbc";
 
@@ -44,17 +44,13 @@ public class createTables{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        DataBaseWriter dbw = new DataBaseWriter();
-        ArrayList<String> depts = dbw.readDepartments("data/lc_departments.csv");
+        DBWriter dbw = new DBWriter();
+        ArrayList<String> depts = dbw.readDepartments("data/departments.csv");
 
-        try {
         dbw.createTables(username, password, url);
         dbw.addData(username, password, url);
         dbw.addDept(depts, username, password, url);
-        dbw.addMajor("data/lc_majors.csv", username, password, url);
-        } catch (SQLException ex) {
-            Logger.getLogger(createTables.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dbw.addMajor("data/majors.csv", username, password, url);
     }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Colleges;
+package College;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  *
  * @author simon
  */
-public class DataBaseWriter {
+public class DBWriter {
     
     public ArrayList<String> readDepartments(String file) {
         ArrayList<String> departments = new ArrayList<>();
@@ -40,7 +40,7 @@ public class DataBaseWriter {
                 //fs.nextLine();
             }
         } catch (IOException ex) {
-            Logger.getLogger(DataBaseWriter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBWriter.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return departments;
@@ -322,7 +322,7 @@ public class DataBaseWriter {
             }
             conn.close();
                  } catch (IOException ex) {
-            Logger.getLogger(DataBaseWriter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DBWriter.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
         }
